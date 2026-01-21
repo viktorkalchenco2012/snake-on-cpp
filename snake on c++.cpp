@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <conio.h>
 #include <windows.h>
 #include <ctime>
@@ -6,15 +6,15 @@
 using namespace std;
 
 bool gameOver;
-const int width = 20;
-const int height = 20;
-int x, y, fruitX, fruitY, score;
-int tailX[100], tailY[100];
-int nTail;
+const short width = 20;
+const short height = 20;
+short x, y, fruitX, fruitY, score;
+short tailX[100], tailY[100];
+short nTail;
 enum eDirection { STOP = 0, LEFT, RIGHT, UP, DOWN };
 eDirection dir;
 time_t startTime;
-const int timeLimitSeconds = 100;
+const short timeLimitSeconds = 100;
 
 void Setup() {
       gameOver = false;
@@ -30,21 +30,21 @@ void Setup() {
 
 void Draw() {
       system("cls");
-      for (int i = 0; i < width + 3; i++)
+      for (short i = 0; i < width + 3; i++)
             cout << "-";
       cout << endl;
 
-      for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+      for (short i = 0; i < height; i++) {
+            for (short j = 0; j < width; j++) {
                   if (j == 0)
                         cout << "|";
                   if (i == y && j == x)
                         cout << "@";
                   else if (i == fruitY && j == fruitX)
-                        cout << "O";
+                        cout << "0";
                   else {
                         bool print = false;
-                        for (int k = 0; k < nTail; k++) {
+                        for (short k = 0; k < nTail; k++) {
                               if (tailX[k] == j && tailY[k] == i) {
                                     cout << "o";
                                     print = true;
@@ -60,10 +60,10 @@ void Draw() {
             cout << endl;
       }
 
-      for (int i = 0; i < width + 3; i++)
+      for (short i = 0; i < width + 3; i++)
             cout << "#";
       cout << endl;
-      cout << "Score:" << score / 10 << endl << endl << "use WASD to mowe" << endl << endl << "GOOD LuCk" << endl;
+      cout << "Score:" << score / 10 << endl << endl << "use WASD to move" << endl << endl << "GOOD luck" << endl;
 }
 
 void Input() {
@@ -87,12 +87,12 @@ void Input() {
 
 
 void Logic() {
-      int prevX = tailX[0];
-      int prevY = tailY[0];
-      int prev2X, prev2Y;
+      short prevX = tailX[0];
+      short prevY = tailY[0];
+      short prev2X, prev2Y;
       tailX[0] = x;
       tailY[0] = y;
-      for (int i = 1; i < nTail; i++) {
+      for (short i = 1; i < nTail; i++) {
             prev2X = tailX[i];
             prev2Y = tailY[i];
             tailX[i] = prevX;
@@ -119,7 +119,7 @@ void Logic() {
       if (x >= width) x = 0; else if (x < 0) x = width - 1;
       if (y >= height) y = 0; else if (y < 0) y = height - 1;
 
-      for (int i = 0; i < nTail; i++)
+      for (short i = 0; i < nTail; i++)
             if (tailX[i] == x && tailY[i] == y)
                   gameOver = true;
 
